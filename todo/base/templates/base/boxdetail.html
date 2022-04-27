@@ -1,5 +1,6 @@
 {% extends 'base/main.html' %}
 {% block content %}
+{% block navbar %}{% endblock navbar %}
 <body>
 <div class="container">
     <h1>Items in Box #{{ box.number }}</h1>
@@ -10,7 +11,7 @@
     <h3>This box is empty, but ready to start packing!!!</h3>
 
     {% endfor %}
-    <a href="{% url 'boxes' %}">Return Box List</a>
+    <a href="{% url 'boxes' %}">Close Box</a>
 </div>
 
     </body>
