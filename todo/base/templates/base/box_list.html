@@ -1,0 +1,11 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+<body>
+{% for box in boxes %}
+Box number{{ box.number }}<a href="{% url 'box-detail' box.pk %}">Items within</a>
+{{ box_items }}
+{% endfor %}
+{{ count }}
+</body>
+{% endblock content %}
