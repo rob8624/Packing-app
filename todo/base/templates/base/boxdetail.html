@@ -1,15 +1,20 @@
 {% extends 'base/main.html' %}
 {% block content %}
 <body>
-<h1>Items in Box #{{ box.number }}</h1>
-{% for boxed in box_items %}
+<div class="container">
+    <h1>Items in Box #{{ box.number }}</h1>
+    {% for boxed in box_items %}
 
-<li>{{  boxed.name }} : packed on <h8>{{ boxed.created }}</h8></li>
-{% empty %}
-<h3>This box is empty, but ready to start packing!!!</h3>
+    <li>{{  boxed.name }} : packed on <h8>{{ boxed.created }}</h8></li>
+    {% empty %}
+    <h3>This box is empty, but ready to start packing!!!</h3>
 
-{% endfor %}
-</body>
+    {% endfor %}
+    <a href="{% url 'boxes' %}">Return Box List</a>
+</div>
+
+    </body>
+
 
 </html>
 {% endblock content %}

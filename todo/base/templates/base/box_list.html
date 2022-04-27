@@ -2,10 +2,19 @@
 
 {% block content %}
 <body>
-{% for box in boxes %}
-Box number{{ box.number }}<a href="{% url 'box-detail' box.pk %}">Items within</a>
-{{ box_items }}
-{% endfor %}
-{{ count }}
+
+<div class="container">
+    <div class="col" style="padding-top: 10px;">
+        <ul class="list-group">
+        {% for box in boxes %}
+            <li class="list-group-item ">Box number{{ box.number }}  <a href="{% url 'box-detail' box.pk %}">Items within</a>
+                {{ box_items }}</li>
+        {% endfor %}
+            {{ count }}
+        </ul>
+    </div>
+</div>
+</div>
+
 </body>
 {% endblock content %}

@@ -29,12 +29,11 @@ class BoxDetail(DetailView):
 
 
 
-
-
 class ItemCreateView(CreateView):
     model = Item
     fields = ['name', 'boxed']
     success_url = reverse_lazy('items')
+
 
 
 class BoxCreateView(CreateView):
