@@ -2,14 +2,23 @@ from django.shortcuts import render
 from .models import Box, Item
 from django.urls import reverse_lazy
 
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
+
+ITEMS_PER_PAGE = 10
+
+
+
 
 
 class ItemList(ListView):
     model = Item
     context_object_name = 'items'
+    paginate_by = 2
+
 
 
 class BoxList(ListView):
@@ -36,10 +45,18 @@ class ItemCreateView(CreateView):
 
 class BoxCreateView(CreateView):
     model = Box
-    fields = ['number']
+    fields = ['number', 'additional']
     success_url = reverse_lazy('boxes')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['box_count'] = Box.boxes.count()
         return context
+
+
+
+
+
+
+
+

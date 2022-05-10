@@ -1,14 +1,22 @@
 {% extends 'base/main.html' %}
 {% block content %}
+
 <body>
 <div class="container">
-    <div class="row">
+
+</div>
+<div class="container">
+
         <ul class="list-group">
+            <div id="list"></div>
             {% for item in items %}
-            <li class="list-group-item ">{{ item }} : {{ item.boxed }}</li>
+            <li class="list-group-item">{{ item }} : {{ item.boxed }} </li>
             {% endfor %}
+        </ul>
+
     </div>
 </div>
+
 </body>
 {% endblock content %}
 </html>

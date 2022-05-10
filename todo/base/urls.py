@@ -9,4 +9,5 @@ urlpatterns = [
     path('boxes/add/', BoxCreateView.as_view(), name='box-add'),
     path('boxes/<int:pk>/', BoxDetail.as_view(), name='box-detail'),
 
+
 ]

@@ -1,16 +1,14 @@
 {% extends 'base/main.html' %}
 
 {% block content %}
+
 <body>
-
-
-
-    <div class="container">
+<div class="container">
     <div class="col" style="padding-top: 10px;">
         <ul class="list-group">
-            <div id="items" hx-target="#items" hx-swap="outerHTML"></div>
+            <div hx-swap="outerHTML"></div>
         {% for box in boxes %}
-            <li class="list-group-item ">Box number{{ box.number }}
+            <li class="list-group-item ">Box number {{ box.number }}
                   <button hx-get="{% url 'box-detail' box.pk %}">Open Box</button>
         {% endfor %}
             {{ count }}

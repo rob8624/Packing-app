@@ -1,11 +1,18 @@
 {% extends 'base/main.html' %}
 
 {% block content %}
+{% block navbar %}{% endblock navbar %}
 <body>
-<form method='POST'>
+
+
+<form id="item-form" action="{{ request.path }}" method='POST' >
+    <a href="{% url 'items' %}">Close</a>
+
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="submit">
+    <input type="submit" value="Add">|<a href="{% url 'items' %}">Close</a>-->
+    <
+
 
 </form>
 </body>
