@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Box, Item
 from django.urls import reverse_lazy
+from django.views.generic.edit import ModelFormMixin
 
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
@@ -17,13 +18,16 @@ ITEMS_PER_PAGE = 10
 class ItemList(ListView):
     model = Item
     context_object_name = 'items'
-    paginate_by = 2
-
 
 
 class BoxList(ListView):
     model = Box
     context_object_name = 'boxes'
+
+    def get_context_data(self, **kwargs):
+        context = super(BoxList, self).get_context_data(**kwargs)
+        context['form'] = BoxCreateView
+        return context
 
 
 class BoxDetail(DetailView):
@@ -52,6 +56,17 @@ class BoxCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context['box_count'] = Box.boxes.count()
         return context
+
+
+
+def add_item(request):
+    name = request.POST.get('filmname')
+    Item.objects.create(name=name)
+    items = Item.objects.all()
+
+    return render(request, 'base/partials/list_items.html', {'items': items})
+
+
 
 
 

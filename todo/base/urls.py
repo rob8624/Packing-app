@@ -1,5 +1,7 @@
 from django.urls import path
 from .views import ItemList, BoxList, ItemCreateView, BoxCreateView, BoxDetail
+from . import views
+
 
 urlpatterns = [
 
@@ -8,6 +10,7 @@ urlpatterns = [
     path('item/add/', ItemCreateView.as_view(), name='item-add'),
     path('boxes/add/', BoxCreateView.as_view(), name='box-add'),
     path('boxes/<int:pk>/', BoxDetail.as_view(), name='box-detail'),
+    path('add-item/', views.add_item, name='add-item')
 
 
 ]

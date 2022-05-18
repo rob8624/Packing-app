@@ -1,13 +1,13 @@
 {% extends 'base/main.html' %}
-
+{% block navbar %}{% endblock %}
 {% block content %}
 <body>
 
-  <div class="container">
-    <form method="POST">
+  <div id="formbox" class="container" >
+    <form method="POST" action="{{ request.path }}" hx-swap="outerHTML">
         {% csrf_token %}
     {{ form.as_p }}
-        <button class="btn btn-outline-success" type="submit">Add Box</button>
+        <button class="btn btn-outline-success" hx-target="#formbox" type="submit">Add Box</button>
     </form>
   </div>
 Number of boxes presently : {{ box_count }}

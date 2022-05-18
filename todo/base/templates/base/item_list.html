@@ -2,21 +2,18 @@
 {% block content %}
 
 <body>
-<div class="container">
-
-</div>
-<div class="container">
-
-        <ul class="list-group">
-            <div id="list"></div>
-            {% for item in items %}
-            <li class="list-group-item">{{ item }} : {{ item.boxed }} </li>
-            {% endfor %}
-        </ul>
-
-    </div>
-</div>
-
+ <div class="container">
+     <div class="align-center col-10 offset-1">
+         <p class="lead ml-0">Our Items</p>
+     <form class="d-flex align-items-center">
+         {% csrf_token %}
+         <input type="text" name="filmname" class="form-control-sm mr-2" placeholder="Enter a item" />
+         <button hx-post="{% url 'add-item' %}" hx-target="#item-list" type="submit" class="btn btn-success btn-sm">Add Item</button>
+     </form>
+     <div id="item-list">
+         {% include 'base/partials/list_items.html' %}
+     </div>
+     </div>
+ </div>
 </body>
 {% endblock content %}
-</html>
