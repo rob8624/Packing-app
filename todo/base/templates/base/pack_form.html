@@ -1,0 +1,7 @@
+
+
+<form action="{{ request.path }}" class="YourFormClass" method="POST" name="pack">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add">
+</form>

@@ -1,0 +1,16 @@
+{% if results %}
+
+    {% csrf_token %}
+    <ul class="list-group col-xs-12">
+    {% for item in results %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ item.name }} {% if item.boxed %}{% else %} : <h6>not packed</h6> {% endif %}
+            <span class="badge badge-success badge-pill" 
+                style="cursor: pointer;"</span>
+
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No search results</p>
+{% endif %}

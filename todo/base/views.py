@@ -2,16 +2,14 @@ from django.shortcuts import render
 from .models import Box, Item
 from django.urls import reverse_lazy
 from django.views.generic.edit import ModelFormMixin
-
+from django.views.decorators.http import require_http_methods
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
-
-ITEMS_PER_PAGE = 10
-
-
+from .forms import PackForm
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 
 
 
@@ -60,11 +58,62 @@ class BoxCreateView(CreateView):
 
 
 def add_item(request):
-    name = request.POST.get('filmname')
+    name = request.POST.get('itemname')
     Item.objects.create(name=name)
     items = Item.objects.all()
 
+
+
     return render(request, 'base/partials/list_items.html', {'items': items})
+
+
+@require_http_methods(['DELETE'])
+def delete_item(request, pk):
+    Item.objects.filter(pk=pk).delete()
+    items = Item.objects.all()
+    return render(request, 'base/partials/list_items.html', {'items': items})
+
+
+
+def search_items(request):
+    search_text = request.POST.get('search')
+
+    results = Item.objects.filter(name__icontains=search_text)
+    context = {'results' : results }
+    return render(request, 'base/partials/search-results.html', context)
+
+
+def pack_item(request, pk):
+    #get item from front end (pack button)
+   item = Item.objects.get(pk=pk)
+
+
+   if request.method == 'POST':
+       form = PackForm(request.POST)
+   if form.is_valid():
+       item.boxed = form.cleaned_data['pack']
+       item.save()
+       #box =  form.cleaned_data['pack']
+       #box_num = item.boxed = box
+
+       #print (f"{item} packind into {box_num}")
+
+       return redirect ('items')
+   else:
+       form = PackForm()
+
+   context = {
+       'form': form,
+
+    }
+
+   return render(request, 'base/pack_form.html', context)
+
+
+
+
+
+
 
 
 
