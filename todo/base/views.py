@@ -18,6 +18,8 @@ class ItemList(ListView):
     context_object_name = 'items'
 
 
+
+
 class BoxList(ListView):
     model = Box
     context_object_name = 'boxes'
@@ -93,25 +95,39 @@ def pack_item(request, pk):
    if form.is_valid():
        item.boxed = form.cleaned_data['pack']
        item.save()
-       #box =  form.cleaned_data['pack']
-       #box_num = item.boxed = box
 
-       #print (f"{item} packind into {box_num}")
 
        return redirect ('items')
    else:
        form = PackForm()
 
    context = {
-       'form': form,
-
-    }
+       'form': form, }
 
    return render(request, 'base/pack_form.html', context)
 
 
 
+def unpack_item(request, pk):
+    #
+   item = Item.objects.get(pk=pk)
+   print(item)
+   if request.method == 'POST':
+       item.boxed = None
+       item.save()
+   items =  Item.objects.all()
 
+   print(item.boxed)
+
+
+
+
+
+   context = {
+       'items' : items,
+       }
+
+   return render(request, 'base/partials/list_items.html', context)
 
 
 

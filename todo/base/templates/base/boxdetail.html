@@ -6,7 +6,7 @@
     <h1>Items in Box #{{ box.number }}</h1>
     {% for boxed in box_items %}
 
-    <li>{{  boxed }} : packed on <h8>{{ boxed.created }}</h8></li>
+    <li>{{ boxed }} : packed on <h8>{{ boxed.created }}</h8></li>
     {% empty %}
     <h3>This box is empty, but ready to start packing!!!</h3>
 

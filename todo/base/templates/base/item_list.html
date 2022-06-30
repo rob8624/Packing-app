@@ -8,11 +8,11 @@
         <p class="lead ml-0">Our Items</p>
         <form class="d-flex align-items-center">
             {% csrf_token %}
-            <input type="text" name="itemname" class="form-control-sm mr-2" placeholder="Enter a item" />
+            <input type="text" name="itemname" class="form-control-sm mr-2" value="Reset Form" onClick="this.form.reset()" placeholder="Enter a item" />
 
             <button style="margin-left: 10px;" hx-post="{% url 'add-item' %}" hx-target="#item-list" type="submit" class="btn btn-success btn-sm">Add Item</button>
         </form>
-
+{{ item_count }}
         </div>
     <section id="film-list" class="col-12">
      <div id="item-list">

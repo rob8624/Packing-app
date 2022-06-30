@@ -14,6 +14,7 @@ urlpatterns = [
     path('delete_item/<int:pk>/', views.delete_item, name='item-delete'),
     path('search-items/', views.search_items, name='search-items'),
     path('pack-item/<int:pk>', views.pack_item, name='pack-item'),
+    path('unpack-item/<int:pk>', views.unpack_item, name='unpack-item'),
 
 
 ]

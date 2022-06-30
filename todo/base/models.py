@@ -18,11 +18,10 @@ class Box(models.Model):
     number = models.PositiveSmallIntegerField(unique=True, default=0)
     created = models.DateTimeField(auto_now_add=True)
     additional = models.CharField(max_length=200, null=True, blank=True)
-
     boxes = models.Manager()
 
     def get_items(self):
-        boxed = self.items.name
+        boxed = self.items.all()
         print(boxed)
         return boxed
 

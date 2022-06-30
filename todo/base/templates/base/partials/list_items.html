@@ -7,10 +7,15 @@
         {% empty %}
         <h3>There are no items</h3>
         {% endfor %}
+
+
+        <h6>Total item count : {{ count_items }}</h6>
+        <h6>Items that are packed : {{ packed_items }}</h6>
             {% for item in items %}
+
             <li class="list-group-item d-flex justify-content-between
-            align-items-center"><div class="col-sm" style="padding-left: 10px;">{{ item }}:
-                {% if item.boxed %} <h7 style="color: red;">{{ item.boxed }}</h7></div>
+            align-items-center"><div class="col-sm" style="padding-left: 10px;">{{ forloop.counter }} {{ item }}:
+                {% if item.boxed %}<h7 style="color: red;">{{ item.boxed }}</h7></div>
                 <span class="badge alert-warning" style="">PACKED!</span>
                 {% else %}
                 <span class="badge alert-primary" style="">NOT PACKED!</span>
@@ -18,12 +23,18 @@
                 <span class="badge alert-success" style="cursor: pointer;"
                       hx-delete="{% url 'item-delete' item.pk %}"
                       hx-target="#item-list"
-                      hx-confirm="Are you sure">X</span>
+                      hx-confirm="Delete Item?">Delete</span>
                 {% if item.boxed == None %}
                 <span class="badge alert-primary" style="cursor: pointer;"
                       hx-post ="{% url 'pack-item' item.pk %}"
                       hx-target="#item-list"
                       hx-confirm="Are you sure">Pack</span>
+                {% endif %}
+                {% if item.boxed != None %}
+                <span class="badge alert-primary" style="cursor: pointer;"
+                      hx-post ="{% url 'unpack-item' item.pk %}"
+                      hx-target="#item-list"
+                      hx-confirm="Are you sure">Unpack</span>
                 {% endif %}
 
             </li>
